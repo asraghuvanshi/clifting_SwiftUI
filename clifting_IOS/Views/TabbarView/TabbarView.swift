@@ -30,6 +30,7 @@ struct TabbarView: View {
                 }
                 .tag(2)
         }
+        .navigationBarBackButtonHidden()
         .onAppear {
             UITabBar.appearance().backgroundColor = UIColor.black.withAlphaComponent(0.6)
         }
