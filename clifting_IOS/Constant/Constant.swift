@@ -19,6 +19,7 @@ struct UIButtonTitle {
     static let getStarted = "Get Started"
     static let login = "Login"
     static let signUp = "Signup"
+    static let editProfile = "Edit Profile"
 }
 
 struct UIPlaceholder {
@@ -36,4 +37,5 @@ struct UITitles {
     static let email = "Emaill"
     static let password = "Password"
     static let mobileNumber = "Mobile number"
+    static let dontHaveAccount = "Don't have an account?"
 }

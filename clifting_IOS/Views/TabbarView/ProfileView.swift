@@ -1,15 +1,9 @@
-//
-//  ProfileView.swift
-//  clifting_IOS
-//
-//  Created by Amit Singh Raghuvanshi on 15/03/25.
-//
-
 import SwiftUI
 
 struct ProfileView: View {
     @State private var rotationAngle: Double = 0
-
+    @Environment(\.presentationMode) var presentationMode  // To go back
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -19,22 +13,28 @@ struct ProfileView: View {
                         .scaledToFit()
                         .foregroundColor(.black)
                         .frame(width: 30, height: 30)
+                        .onTapGesture {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    
                     Spacer()
-                    Text("AS Raghuvanshi")
+                    
+                    Text("iOS Developer")
                         .font(.system(size: 16, weight: .bold))
+                    
                     Spacer()
                     NavigationLink(destination: UserProfileView()) {
-                        Image(.bgImageSs)
+                        Image(.bgImageS)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 35, height: 35)
                             .clipShape(Circle())
                     }
-                }.padding(10)
-           
+                }
+                .padding(10)
                 
                 VStack {
-                    Image(.bgImageSs)
+                    Image(.bgImageS)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 100)
@@ -55,8 +55,32 @@ struct ProfileView: View {
                                 rotationAngle = 360
                             }
                         }
+                    
+                    Text("Tiny life on Earth Just Another Average Programmer")
+                        .frame(width: 200)
+                        .foregroundStyle(.gray)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                    
+                    HStack(alignment: .center, spacing: 20) {
+                        VStack{
+                            Text("Posts")
+                            Text("200")
+                        }
+                        VStack{
+                            Text("Follower")
+                            Text("200")
+                        }
+                        VStack{
+                            Text("Following")
+                            Text("200k")
+                        }
+                    }
+                    .foregroundStyle(.gray)
                 }
-                    Spacer()
+                Spacer()
             }
         }
         .navigationBarBackButtonHidden(true)

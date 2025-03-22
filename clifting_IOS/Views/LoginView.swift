@@ -21,7 +21,7 @@ struct LoginView: View {
                 
                 VStack(alignment: .leading, spacing: 30) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Enter username or email")
+                        Text(UITitles.userName)
                             .font(.title3)
                             .foregroundColor(.black)
                         
@@ -34,7 +34,7 @@ struct LoginView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Enter password")
+                        Text(UITitles.password)
                             .font(.title3)
                             .foregroundColor(.black)
                         
@@ -59,7 +59,7 @@ struct LoginView: View {
                     }
                     HStack(alignment: .center , spacing: 5) {
                         Spacer()
-                        Text("Don't have an account?")
+                        Text(UITitles.dontHaveAccount)
                         NavigationLink(destination: SignupView(usernameOrEmail: .constant(""), password: .constant(""))) {
                             Text(UIButtonTitle.signUp)
                         }
