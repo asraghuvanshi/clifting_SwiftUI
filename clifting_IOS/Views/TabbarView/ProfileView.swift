@@ -3,7 +3,10 @@ import SwiftUI
 struct ProfileView: View {
     @State private var rotationAngle: Double = 0
     @Environment(\.presentationMode) var presentationMode  // To go back
-    
+    @State private var value = 0
+    var userPostImage:[UIImage] = [.bgImageF , .bgImageFf, .bgImageFi, .bgImageS, .bgImageSi, .splashBg, .bgImageT]
+    let columns = [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()), GridItem(.flexible())]
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -34,7 +37,7 @@ struct ProfileView: View {
                 .padding(10)
                 
                 VStack {
-                    Image(.bgImageS)
+                    Image(.bgImageFi)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 100)
@@ -79,6 +82,21 @@ struct ProfileView: View {
                         }
                     }
                     .foregroundStyle(.gray)
+                    
+                    Text("Posts")
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) { // Vertical spacing = 20
+                            ForEach(userPostImage.indices, id: \.self) { index in
+                                Image(uiImage: userPostImage[index])
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 100)
+                                    .cornerRadius(10)
+                                    .clipped()
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                    }
                 }
                 Spacer()
             }
