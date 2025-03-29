@@ -2,11 +2,13 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var rotationAngle: Double = 0
-    @Environment(\.presentationMode) var presentationMode  // To go back
+    @State private var selectedImage: UIImage?
+    @State private var isShowingDetail = false
     @State private var value = 0
+
+    @Environment(\.presentationMode) var presentationMode
     var userPostImage:[UIImage] = [.bgImageF , .bgImageFf, .bgImageFi, .bgImageS, .bgImageSi, .splashBg, .bgImageT]
     let columns = [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()), GridItem(.flexible())]
-
     var body: some View {
         NavigationStack {
             VStack {
@@ -26,7 +28,7 @@ struct ProfileView: View {
                         .font(.system(size: 16, weight: .bold))
                     
                     Spacer()
-                    NavigationLink(destination: UserProfileView()) {
+                    NavigationLink(destination: UserProfileView(selectedImage: userPostImage.first!)) {
                         Image(.bgImageS)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -85,7 +87,7 @@ struct ProfileView: View {
                     
                     Text("Posts")
                     ScrollView {
-                        LazyVGrid(columns: columns, spacing: 20) { // Vertical spacing = 20
+                        LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(userPostImage.indices, id: \.self) { index in
                                 Image(uiImage: userPostImage[index])
                                     .resizable()
@@ -93,9 +95,18 @@ struct ProfileView: View {
                                     .frame(width: 80, height: 100)
                                     .cornerRadius(10)
                                     .clipped()
+                                    .onTapGesture {
+                                        selectedImage = userPostImage[index]
+                                        isShowingDetail = true
+                                    }
                             }
                         }
                         .padding(.horizontal, 20)
+                    }
+                    .navigationDestination(isPresented: $isShowingDetail) {
+                        if let selectedImage = selectedImage {
+                            UserProfileView(selectedImage: selectedImage)
+                        }
                     }
                 }
                 Spacer()
